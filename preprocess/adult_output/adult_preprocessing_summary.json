@@ -1,0 +1,38 @@
+{
+  "source_rows": 32561,
+  "feature_count": 14,
+  "original_target_counts": {
+    "0": 24720,
+    "1": 7841
+  },
+  "missing_counts_before_unknown_category": {
+    "age": 0,
+    "workclass": 1836,
+    "fnlwgt": 0,
+    "education": 0,
+    "education-num": 0,
+    "marital-status": 0,
+    "occupation": 1843,
+    "relationship": 0,
+    "race": 0,
+    "sex": 0,
+    "capital-gain": 0,
+    "capital-loss": 0,
+    "hours-per-week": 0,
+    "native-country": 583,
+    "income": 0
+  },
+  "split_rows": {
+    "train": 20838,
+    "valid": 5210,
+    "test": 6513
+  },
+  "train_rows_after_smote": 31624,
+  "minority_ratio_before_smote": 0.24119397255014877,
+  "smote_threshold": 0.25,
+  "smote_applied": true,
+  "train_target_counts_after_smote": {
+    "0": 15812,
+    "1": 15812
+  }
+}

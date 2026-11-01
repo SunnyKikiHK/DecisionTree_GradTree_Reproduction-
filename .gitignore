@@ -1,0 +1,5 @@
+# Generated Adult data and preprocessing artifacts
+# Local Python environments and notebook checkpoints
+.venv/
+.ipynb_checkpoints/
+__pycache__/
