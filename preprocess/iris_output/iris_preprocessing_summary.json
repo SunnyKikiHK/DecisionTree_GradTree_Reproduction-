@@ -1,0 +1,39 @@
+{
+  "source_rows": 150,
+  "rows_after_cleaning": 150,
+  "feature_count": 4,
+  "features": [
+    "sepal_length",
+    "sepal_width",
+    "petal_length",
+    "petal_width"
+  ],
+  "target": "class",
+  "classes": [
+    "Iris-setosa",
+    "Iris-versicolor",
+    "Iris-virginica"
+  ],
+  "original_target_counts": {
+    "0": 50,
+    "1": 50,
+    "2": 50
+  },
+  "missing_counts": {},
+  "imputation": null,
+  "split_rows": {
+    "train": 96,
+    "valid": 24,
+    "test": 30
+  },
+  "train_rows_after_smote": 96,
+  "minority_ratio_before_smote": 0.3125,
+  "smote_threshold": 0.125,
+  "smote_applied": false,
+  "train_target_counts_after_smote": {
+    "0": 32,
+    "1": 30,
+    "2": 34
+  },
+  "random_seed": 42
+}
