@@ -14,18 +14,18 @@
   },
   "missing_counts": {},
   "split_rows": {
-    "train": 108,
-    "valid": 35,
-    "test": 35
+    "train": 113,
+    "valid": 29,
+    "test": 36
   },
-  "train_rows_after_smote": 108,
-  "minority_ratio_before_smote": 0.2777777777777778,
+  "train_rows_after_smote": 113,
+  "minority_ratio_before_smote": 0.2920353982300885,
   "smote_threshold": 0.125,
   "smote_applied": false,
   "train_target_counts_after_smote": {
-    "0": 34,
-    "1": 44,
-    "2": 30
+    "0": 35,
+    "1": 45,
+    "2": 33
   },
   "random_seed": 42
 }
