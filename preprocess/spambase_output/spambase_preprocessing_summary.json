@@ -1,0 +1,28 @@
+{
+  "source_rows": 4601,
+  "feature_count": 57,
+  "target": "Class",
+  "classes": [
+    "0",
+    "1"
+  ],
+  "original_target_counts": {
+    "0": 2788,
+    "1": 1813
+  },
+  "missing_counts": {},
+  "split_rows": {
+    "train": 2761,
+    "valid": 920,
+    "test": 920
+  },
+  "train_rows_after_smote": 2761,
+  "minority_ratio_before_smote": 0.38500543281419775,
+  "smote_threshold": 0.25,
+  "smote_applied": false,
+  "train_target_counts_after_smote": {
+    "0": 1698,
+    "1": 1063
+  },
+  "random_seed": 42
+}
