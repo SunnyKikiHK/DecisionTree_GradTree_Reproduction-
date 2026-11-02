@@ -1,0 +1,50 @@
+{
+  "source_rows": 132,
+  "rows_after_cleaning": 132,
+  "feature_count": 8,
+  "features": [
+    "age-at-heart-attack",
+    "pericardial-effusion",
+    "fractional-shortening",
+    "epss",
+    "lvdd",
+    "wall-motion-score",
+    "wall-motion-index",
+    "mult"
+  ],
+  "target": "alive-at-1",
+  "classes": [
+    "0",
+    "1"
+  ],
+  "original_target_counts": {
+    "0": 108,
+    "1": 24
+  },
+  "missing_counts": {
+    "age-at-heart-attack": 5,
+    "pericardial-effusion": 1,
+    "fractional-shortening": 8,
+    "epss": 15,
+    "lvdd": 11,
+    "wall-motion-score": 4,
+    "wall-motion-index": 1,
+    "mult": 4,
+    "alive-at-1": 58
+  },
+  "imputation": "mode of full dataset, before split",
+  "split_rows": {
+    "train": 84,
+    "valid": 21,
+    "test": 27
+  },
+  "train_rows_after_smote": 136,
+  "minority_ratio_before_smote": 0.19047619047619047,
+  "smote_threshold": 0.25,
+  "smote_applied": true,
+  "train_target_counts_after_smote": {
+    "0": 68,
+    "1": 68
+  },
+  "random_seed": 42
+}
