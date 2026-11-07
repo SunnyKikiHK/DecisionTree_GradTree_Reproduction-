@@ -1,6 +1,6 @@
 """The GradTree model in PyTorch.
 
-Parameters (paper notation in parentheses)
+Parameters 
 ------------------------------------------
 ``split_index``       (I)  shape (2**d - 1, n_features)
     Real-valued feature scores for every internal node.  The forward pass
@@ -285,6 +285,7 @@ class GradTree(nn.Module):
 
     # Inference helpers
     def _output_probabilities(self, logits: Tensor) -> Tensor:
+        """Converts raw logits into class probabilities"""
         if self.binary:
             return torch.sigmoid(logits)
         if self.output_activation == "softmax":
@@ -293,14 +294,14 @@ class GradTree(nn.Module):
 
     @torch.no_grad()
     def predict_proba(self, X) -> Tensor:
-        """Class probabilities for ``X`` (not batched; use the trainer for large data)."""
+        """Class probabilities for X (not batched; use the trainer for large data)."""
         self.eval()
         logits = self.forward(X)
         return self._output_probabilities(logits)
 
     @torch.no_grad()
     def predict(self, X) -> np.ndarray:
-        """Hard class predictions for ``X`` (not batched)."""
+        """Hard class predictions for X (not batched)."""
         proba = self.predict_proba(X)
         if proba.numel() == 0:
             return np.empty(0, dtype=np.int64)
@@ -317,23 +318,21 @@ class GradTree(nn.Module):
     def hard_tree(self, prune_X=None, min_samples: int | float = 1):
         """Extract a :class:`~model.sunny.pruning.HardDecisionTree`.
 
-        Parameters
-        ----------
         prune_X:
             Training features used to count samples and prune the tree.  If
-            ``None``, the returned tree is the full, unpruned tree.
+            None, the returned tree is the full, unpruned tree.
         min_samples:
             Minimum branch size for pruning (see ``HardDecisionTree.prune``).
         """
         from .pruning import HardDecisionTree
 
         if prune_X is not None and torch.is_tensor(prune_X):
-            prune_X = prune_X.detach().cpu().numpy()
+            prune_X = prune_X.detach().cpu().numpy()  # (n_samples, F)
 
-        feature = self.feature_indices.cpu().numpy()
-        thresholds = self.split_threshold.detach().cpu().numpy()
-        threshold = thresholds[np.arange(self.num_internal), feature]
-        leaf_values = self.leaf_logits.detach().cpu().numpy()
+        feature = self.feature_indices.cpu().numpy()  # (N,)
+        thresholds = self.split_threshold.detach().cpu().numpy()  # (N, F)
+        threshold = thresholds[np.arange(self.num_internal), feature]  # (N,)
+        leaf_values = self.leaf_logits.detach().cpu().numpy()  # (P,) or (P, C)
 
         tree = HardDecisionTree(feature, threshold, leaf_values)
         if prune_X is not None:
