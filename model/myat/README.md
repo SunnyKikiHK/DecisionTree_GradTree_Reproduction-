@@ -1,6 +1,6 @@
 # GradTree in PyTorch (Myat)
 
-A reproduction of GradTree trained on our preprocessed datasets. It follows the paper, and the authors' official experiment code (`experiments_paper_gradtree/` in [s-marton/GradTree](https://github.com/s-marton/GradTree)) where the paper leaves details out.
+A reproduction of GradTree trained on our preprocessed datasets.
 
 | File | What it does |
 |---|---|
