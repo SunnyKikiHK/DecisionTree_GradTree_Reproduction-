@@ -111,7 +111,12 @@ def main() -> None:
             settings[name]["epochs"] = args.epochs
         if args.restarts is not None:
             settings[name]["restarts"] = args.restarts
-    (out_dir / "settings.json").write_text(json.dumps(settings, indent=2), encoding="utf-8")
+    # Like runs.csv, keep the settings of datasets trained in earlier runs
+    settings_path = out_dir / "settings.json"
+    saved = json.loads(settings_path.read_text(encoding="utf-8")) if settings_path.exists() else {}
+    saved.update(settings)
+    saved = {name: saved[name] for name in DATASETS if name in saved}
+    settings_path.write_text(json.dumps(saved, indent=2), encoding="utf-8")
 
     trials = [(name, seed) for name in args.datasets for seed in args.seeds]
     threads = 1 if args.jobs > 1 else max(1, os.cpu_count() // 2)
