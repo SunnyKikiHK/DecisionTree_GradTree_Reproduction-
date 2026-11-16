@@ -6,8 +6,9 @@ Run from the repository root:
 
 Each trial trains on <name>_output/seed_<seed>/ with the paper's tuned hyperparameters (Table 12),
 early stopping on the validation split, and reports macro F1 on train / valid / test and the tree
-size after pruning. Results go to model/jiayang/results/: runs.csv (one row per trial) and
-summary.csv (mean and std over trials next to the paper's numbers).
+size after pruning. Results go to model/jiayang/results/: runs.csv (one row per trial, saved after
+every trial) and summary.csv (mean and std over trials next to the paper's numbers). Trials already
+in runs.csv are skipped, so rerunning the same command resumes an interrupted run (--rerun trains them again).
 """
 
 import argparse
@@ -101,33 +102,32 @@ def main():
     parser.add_argument('--jobs', type=int, default=4, help='trials trained in parallel')
     parser.add_argument('--epochs', type=int, default=10_000, help='maximum epochs (lower only for quick tests)')
     parser.add_argument('--restarts', type=int, default=3)
+    parser.add_argument('--rerun', action='store_true', help='train again trials already in results/runs.csv')
     args = parser.parse_args()
 
     for name in args.datasets:  # fail before training if a split is missing
         for seed in args.seeds:
             load_split(name, seed)
 
-    rows = []
+    # runs.csv is updated after every trial, so an interrupted run resumes with the trials still missing
+    RESULTS_DIR.mkdir(exist_ok=True)
+    runs_path = RESULTS_DIR / 'runs.csv'
+    runs = pd.read_csv(runs_path) if runs_path.exists() else pd.DataFrame(columns=['dataset', 'seed'])
+    done = set(zip(runs['dataset'], runs['seed'])) if not args.rerun else set()
+    trials = [(name, seed) for name in args.datasets for seed in args.seeds if (name, seed) not in done]
+    print(f'{len(trials)} trials to train ({len(args.datasets) * len(args.seeds) - len(trials)} already in {runs_path.name})', flush=True)
+
+    order = list(PAPER_HYPERPARAMETERS)
     with ProcessPoolExecutor(max_workers=args.jobs) as pool:
-        futures = [pool.submit(run_trial, name, seed, args.epochs, args.restarts, 1)
-                   for name in args.datasets for seed in args.seeds]
+        futures = [pool.submit(run_trial, name, seed, args.epochs, args.restarts, 1) for name, seed in trials]
         for future in as_completed(futures):
             row = future.result()
-            rows.append(row)
-            print(f"{row['dataset']:15s} seed {row['seed']}: test F1 {row['f1_test']:.3f}, "
+            print(f"{time.strftime('%H:%M')} {row['dataset']:15s} seed {row['seed']}: test F1 {row['f1_test']:.3f}, "
                   f"{row['tree_size']} nodes, {row['epochs']} epochs, {row['fit_seconds']:.0f}s", flush=True)
-
-    RESULTS_DIR.mkdir(exist_ok=True)
-    runs = pd.DataFrame(rows)
-    runs_path = RESULTS_DIR / 'runs.csv'
-    if runs_path.exists():  # keep earlier trials of other datasets / seeds
-        previous = pd.read_csv(runs_path)
-        key = ['dataset', 'seed']
-        keep = ~previous.set_index(key).index.isin(runs.set_index(key).index)
-        runs = pd.concat([previous[keep], runs])
-    order = list(PAPER_HYPERPARAMETERS)
-    runs = runs.sort_values(['dataset', 'seed'], key=lambda c: c.map(order.index) if c.name == 'dataset' else c)
-    runs.to_csv(runs_path, index=False)
+            keep = ~((runs['dataset'] == row['dataset']) & (runs['seed'] == row['seed']))
+            runs = pd.concat([runs[keep], pd.DataFrame([row])], ignore_index=True)
+            runs = runs.sort_values(['dataset', 'seed'], key=lambda c: c.map(order.index) if c.name == 'dataset' else c)
+            runs.to_csv(runs_path, index=False)
 
     summary = summarize(runs)
     summary.to_csv(RESULTS_DIR / 'summary.csv', index=False)

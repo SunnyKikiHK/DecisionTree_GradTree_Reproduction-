@@ -122,9 +122,14 @@ class GradTree:
         s = torch.sigmoid(thresholds - selected_x)
         s = straight_through(s, torch.round(s))  # Equation 7, hard split
 
-        # Equation 3: product over the nodes on the path to each leaf
-        s_path = s[:, self.node_index]
-        leaf_membership = ((1 - self.path) * s_path + self.path * (1 - s_path)).prod(-1)
+        # Equation 3: product over the nodes on the path to each leaf. Built level by level: a node's
+        # left child gets the node's product times s, its right child times (1 - s). After d levels
+        # this is the product along every root-to-leaf path given by Equations 4 and 5, with the same
+        # values and gradients, but shared path prefixes are multiplied once instead of once per leaf.
+        leaf_membership = torch.ones(X.shape[0], 1, dtype=s.dtype)
+        for level in range(self.depth):
+            s_level = s[:, 2 ** level - 1:2 ** (level + 1) - 1]  # nodes of this level, left to right
+            leaf_membership = torch.stack([leaf_membership * s_level, leaf_membership * (1 - s_level)], dim=2).flatten(1)
         return leaf_membership @ leaf_logits  # Equation 1
 
     def loss(self, y, logits):
