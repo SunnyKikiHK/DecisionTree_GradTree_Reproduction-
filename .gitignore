@@ -1,6 +1,7 @@
 # Generated preprocessing outputs (rebuild by running the notebooks in preprocess/)
 preprocess/spambase_output/
 preprocess/wine_output/
+preprocess/adult_output/seed_*/
 
 # Local Python environments and notebook checkpoints
 .venv/

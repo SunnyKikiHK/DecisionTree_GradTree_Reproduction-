@@ -27,12 +27,13 @@
     "valid": 5210,
     "test": 6513
   },
-  "train_rows_after_smote": 31624,
-  "minority_ratio_before_smote": 0.24119397255014877,
+  "train_rows_after_smote": 31548,
+  "minority_ratio_before_smote": 0.24301756406564928,
   "smote_threshold": 0.25,
   "smote_applied": true,
   "train_target_counts_after_smote": {
-    "0": 15812,
-    "1": 15812
-  }
+    "0": 15774,
+    "1": 15774
+  },
+  "random_seed": 42
 }
