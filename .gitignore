@@ -3,3 +3,7 @@
 .venv/
 .ipynb_checkpoints/
 __pycache__/
+
+# Model checkpoints / generated training artifacts
+model/sunny/checkpoints/
+*.pt
