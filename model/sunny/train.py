@@ -141,14 +141,14 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Could not load dataset: {error}")
         return 1
 
-    num_classes = splits.num_classes
+    num_classes = splits.num_classes 
     if num_classes == 2:
         unique = set(np.unique(splits.y_train).tolist())
         if not unique.issubset({0, 1}):
             print(f"Binary dataset must use labels 0/1, found {sorted(unique)}")
             return 1
 
-    trial_label = ""
+    trial_label = "" # --trial-seed selects the folder loaded by data.load_dataset
     if args.trial_seed is not None:
         trial_label = f" (trial seed {args.trial_seed})"
     print(f"Dataset: {args.dataset}{trial_label}")

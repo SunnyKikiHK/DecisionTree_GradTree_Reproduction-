@@ -144,7 +144,7 @@ class GradTreeTrainer:
         for restart in range(self.config.restarts + 1):
             seed = self.config.seed + restart
             set_seed(seed)
-            self.model.reset_parameters(seed=seed)
+            self.model.reset_parameters(seed=seed) # initialization
             if self.config.init == "data_aware":
                 self.model.initialize_thresholds_from_data(X_train)
             self.optimizer = self._make_optimizer()
@@ -226,7 +226,7 @@ class GradTreeTrainer:
                 features = X_train[indices]
                 targets = y_train[indices]
 
-                self.optimizer.zero_grad(set_to_none=True)
+                self.optimizer.zero_grad(set_to_none=True) # set to none not zero
                 logits = self.model(features)
                 loss = self.loss_fn(logits, targets)
                 loss.backward()
