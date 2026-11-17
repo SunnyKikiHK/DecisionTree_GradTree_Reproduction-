@@ -1,4 +1,7 @@
-# Generated Adult data and preprocessing artifacts
+# Generated preprocessing outputs (rebuild by running the notebooks in preprocess/)
+preprocess/spambase_output/
+preprocess/wine_output/
+
 # Local Python environments and notebook checkpoints
 .venv/
 .ipynb_checkpoints/
