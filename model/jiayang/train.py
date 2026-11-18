@@ -9,6 +9,8 @@ early stopping on the validation split, and reports macro F1 on train / valid / 
 size after pruning. Results go to model/jiayang/results/: runs.csv (one row per trial, saved after
 every trial) and summary.csv (mean and std over trials next to the paper's numbers). Trials already
 in runs.csv are skipped, so rerunning the same command resumes an interrupted run (--rerun trains them again).
+--index-activation gumbel / annealing trains the ablation variants of the paper (Tables 4-6) instead,
+with results in runs_<variant>.csv and summary_<variant>.csv.
 """
 
 import argparse
@@ -55,10 +57,11 @@ def load_split(name, seed):
     return split
 
 
-def run_trial(name, seed, epochs, restarts, threads):
+def run_trial(name, seed, epochs, restarts, threads, index_activation='entmax'):
     torch.set_num_threads(threads)
     split = load_split(name, seed)
-    model = GradTree(split['X_train'].shape[1], split['n_classes'], seed=MODEL_SEED, **PAPER_HYPERPARAMETERS[name])
+    model = GradTree(split['X_train'].shape[1], split['n_classes'], seed=MODEL_SEED,
+                     index_activation=index_activation, **PAPER_HYPERPARAMETERS[name])
     start = time.perf_counter()
     model.fit(split['X_train'], split['y_train'], split['X_valid'], split['y_valid'], epochs=epochs, restarts=restarts)
     row = {'dataset': name, 'seed': seed}
@@ -103,6 +106,8 @@ def main():
     parser.add_argument('--epochs', type=int, default=10_000, help='maximum epochs (lower only for quick tests)')
     parser.add_argument('--restarts', type=int, default=3)
     parser.add_argument('--rerun', action='store_true', help='train again trials already in results/runs.csv')
+    parser.add_argument('--index-activation', default='entmax', choices=['entmax', 'gumbel', 'annealing'],
+                        help='split feature selection: entmax is GradTree, the others are the ablation variants')
     args = parser.parse_args()
 
     for name in args.datasets:  # fail before training if a split is missing
@@ -111,7 +116,8 @@ def main():
 
     # runs.csv is updated after every trial, so an interrupted run resumes with the trials still missing
     RESULTS_DIR.mkdir(exist_ok=True)
-    runs_path = RESULTS_DIR / 'runs.csv'
+    suffix = '' if args.index_activation == 'entmax' else f'_{args.index_activation}'
+    runs_path = RESULTS_DIR / f'runs{suffix}.csv'
     runs = pd.read_csv(runs_path) if runs_path.exists() else pd.DataFrame(columns=['dataset', 'seed'])
     done = set(zip(runs['dataset'], runs['seed'])) if not args.rerun else set()
     trials = [(name, seed) for name in args.datasets for seed in args.seeds if (name, seed) not in done]
@@ -119,7 +125,7 @@ def main():
 
     order = list(PAPER_HYPERPARAMETERS)
     with ProcessPoolExecutor(max_workers=args.jobs) as pool:
-        futures = [pool.submit(run_trial, name, seed, args.epochs, args.restarts, 1) for name, seed in trials]
+        futures = [pool.submit(run_trial, name, seed, args.epochs, args.restarts, 1, args.index_activation) for name, seed in trials]
         for future in as_completed(futures):
             row = future.result()
             print(f"{time.strftime('%H:%M')} {row['dataset']:15s} seed {row['seed']}: test F1 {row['f1_test']:.3f}, "
@@ -130,7 +136,7 @@ def main():
             runs.to_csv(runs_path, index=False)
 
     summary = summarize(runs)
-    summary.to_csv(RESULTS_DIR / 'summary.csv', index=False)
+    summary.to_csv(RESULTS_DIR / f'summary{suffix}.csv', index=False)
     with pd.option_context('display.float_format', '{:.3f}'.format, 'display.width', 200):
         print()
         print(summary.to_string(index=False))

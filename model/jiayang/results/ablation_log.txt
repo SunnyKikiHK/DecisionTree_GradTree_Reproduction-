@@ -1,0 +1,72 @@
+30 trials to train (0 already in runs_gumbel.csv)
+21:01 echocardiogram  seed 42: test F1 0.679, 37 nodes, 1207 epochs, 98s
+21:01 echocardiogram  seed 46: test F1 0.734, 67 nodes, 1222 epochs, 96s
+21:01 echocardiogram  seed 47: test F1 0.645, 63 nodes, 1249 epochs, 97s
+21:01 echocardiogram  seed 48: test F1 0.645, 75 nodes, 1289 epochs, 96s
+21:01 echocardiogram  seed 44: test F1 0.667, 61 nodes, 1424 epochs, 106s
+21:01 echocardiogram  seed 43: test F1 0.341, 35 nodes, 1632 epochs, 118s
+21:01 echocardiogram  seed 45: test F1 0.750, 67 nodes, 2051 epochs, 152s
+21:02 echocardiogram  seed 49: test F1 0.614, 55 nodes, 1159 epochs, 80s
+21:02 echocardiogram  seed 50: test F1 0.583, 65 nodes, 1370 epochs, 94s
+21:02 iris            seed 42: test F1 0.931, 27 nodes, 1866 epochs, 109s
+21:03 echocardiogram  seed 51: test F1 0.571, 53 nodes, 1884 epochs, 137s
+21:03 iris            seed 43: test F1 1.000, 27 nodes, 2550 epochs, 142s
+21:03 iris            seed 44: test F1 0.900, 29 nodes, 2487 epochs, 139s
+21:04 iris            seed 47: test F1 1.000, 23 nodes, 2024 epochs, 92s
+21:04 iris            seed 46: test F1 0.822, 23 nodes, 2269 epochs, 109s
+21:04 iris            seed 45: test F1 0.889, 23 nodes, 2715 epochs, 134s
+21:04 iris            seed 48: test F1 0.808, 31 nodes, 2460 epochs, 103s
+21:04 iris            seed 50: test F1 0.936, 37 nodes, 1856 epochs, 70s
+21:04 iris            seed 49: test F1 0.939, 33 nodes, 2236 epochs, 86s
+21:09 iris            seed 51: test F1 0.857, 37 nodes, 5851 epochs, 362s
+21:09 wine            seed 42: test F1 0.966, 31 nodes, 2373 epochs, 333s
+21:10 wine            seed 43: test F1 0.943, 31 nodes, 2573 epochs, 382s
+21:11 wine            seed 45: test F1 0.928, 33 nodes, 2829 epochs, 429s
+21:11 wine            seed 44: test F1 0.942, 21 nodes, 3189 epochs, 459s
+21:13 wine            seed 47: test F1 0.880, 31 nodes, 3462 epochs, 495s
+21:13 wine            seed 46: test F1 0.941, 25 nodes, 3668 epochs, 521s
+21:15 wine            seed 50: test F1 0.944, 35 nodes, 2685 epochs, 271s
+21:15 wine            seed 48: test F1 0.977, 33 nodes, 3565 epochs, 358s
+21:17 wine            seed 51: test F1 0.941, 31 nodes, 4870 epochs, 321s
+21:17 wine            seed 49: test F1 0.943, 23 nodes, 5812 epochs, 450s
+
+       dataset  trials  test_f1  test_f1_std  paper_test_f1  paper_test_f1_std  train_f1  paper_train_f1  tree_size  tree_size_std  paper_tree_size  test_accuracy  fit_seconds
+echocardiogram      10    0.623        0.109          0.658              0.113     0.772           0.827     57.800         12.400           43.200          0.715      107.334
+          iris      10    0.908        0.063          0.938              0.057     0.951           0.978     29.000          5.138           14.400          0.910      134.521
+          wine      10    0.941        0.024          0.933              0.031     0.974           0.995     29.400          4.454           24.000          0.942      401.945
+30 trials to train (0 already in runs_annealing.csv)
+21:19 echocardiogram  seed 47: test F1 0.553, 31 nodes, 871 epochs, 67s
+21:19 echocardiogram  seed 44: test F1 0.667, 45 nodes, 1091 epochs, 85s
+21:19 echocardiogram  seed 46: test F1 0.509, 41 nodes, 1129 epochs, 89s
+21:19 echocardiogram  seed 43: test F1 0.442, 33 nodes, 1199 epochs, 91s
+21:19 echocardiogram  seed 42: test F1 0.667, 45 nodes, 1199 epochs, 91s
+21:19 echocardiogram  seed 48: test F1 0.583, 37 nodes, 1511 epochs, 110s
+21:19 echocardiogram  seed 45: test F1 0.645, 49 nodes, 1652 epochs, 120s
+21:20 echocardiogram  seed 49: test F1 0.667, 37 nodes, 1085 epochs, 73s
+21:20 echocardiogram  seed 50: test F1 0.464, 35 nodes, 1065 epochs, 72s
+21:20 echocardiogram  seed 51: test F1 0.378, 47 nodes, 1061 epochs, 69s
+21:20 iris            seed 43: test F1 0.921, 13 nodes, 1482 epochs, 78s
+21:21 iris            seed 42: test F1 1.000, 9 nodes, 1781 epochs, 94s
+21:21 iris            seed 44: test F1 0.901, 11 nodes, 1447 epochs, 76s
+21:21 iris            seed 46: test F1 0.824, 17 nodes, 1124 epochs, 62s
+21:21 iris            seed 45: test F1 0.928, 13 nodes, 1671 epochs, 88s
+21:21 iris            seed 48: test F1 0.798, 13 nodes, 1241 epochs, 68s
+21:21 iris            seed 47: test F1 0.963, 13 nodes, 1417 epochs, 77s
+21:22 iris            seed 50: test F1 0.936, 17 nodes, 1300 epochs, 75s
+21:23 wine            seed 44: test F1 0.859, 7 nodes, 987 epochs, 113s
+21:23 wine            seed 43: test F1 0.930, 7 nodes, 1210 epochs, 138s
+21:23 wine            seed 45: test F1 0.859, 33 nodes, 983 epochs, 112s
+21:23 iris            seed 49: test F1 0.969, 13 nodes, 3322 epochs, 178s
+21:23 iris            seed 51: test F1 0.922, 19 nodes, 3119 epochs, 168s
+21:24 wine            seed 42: test F1 0.919, 19 nodes, 1731 epochs, 188s
+21:25 wine            seed 46: test F1 0.950, 15 nodes, 1709 epochs, 174s
+21:25 wine            seed 51: test F1 0.756, 15 nodes, 1005 epochs, 95s
+21:25 wine            seed 50: test F1 0.924, 11 nodes, 1267 epochs, 118s
+21:25 wine            seed 47: test F1 0.860, 9 nodes, 1462 epochs, 135s
+21:25 wine            seed 48: test F1 0.907, 13 nodes, 1409 epochs, 128s
+21:25 wine            seed 49: test F1 0.943, 11 nodes, 1657 epochs, 135s
+
+       dataset  trials  test_f1  test_f1_std  paper_test_f1  paper_test_f1_std  train_f1  paper_train_f1  tree_size  tree_size_std  paper_tree_size  test_accuracy  fit_seconds
+echocardiogram      10    0.558        0.100          0.658              0.113     0.727           0.827     40.000          5.950           43.200          0.663       86.717
+          iris      10    0.916        0.060          0.938              0.057     0.954           0.978     13.800          2.857           14.400          0.920       96.436
+          wine      10    0.891        0.056          0.933              0.031     0.908           0.995     14.000          7.280           24.000          0.892      133.452

@@ -1,0 +1,4 @@
+dataset,entmax_test_f1,paper_entmax_test_f1,entmax_tree_size,entmax_trials,gumbel_test_f1,paper_gumbel_test_f1,gumbel_tree_size,gumbel_trials,annealing_test_f1,paper_annealing_test_f1,annealing_tree_size,annealing_trials
+echocardiogram,0.598 ± 0.108,0.658 ± 0.113,50.4,10,0.623 ± 0.109,0.574 ± 0.108,57.8,10,0.558 ± 0.100,0.619 ± 0.151,40.0,10
+iris,0.914 ± 0.072,0.938 ± 0.057,16.4,10,0.908 ± 0.063,0.743 ± 0.224,29.0,10,0.916 ± 0.060,0.930 ± 0.048,13.8,10
+wine,0.929 ± 0.032,0.933 ± 0.031,22.8,10,0.941 ± 0.024,0.565 ± 0.195,29.4,10,0.891 ± 0.056,0.881 ± 0.043,14.0,10

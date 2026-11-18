@@ -7,6 +7,9 @@ Gradient Descent" (AAAI 2024):
 - Glorot uniform initialization (Algorithm 2), Adam per parameter group, mini-batches
 - weight averaging over 5 consecutive checkpoints, early stopping on the validation loss, random restarts
 - post-hoc pruning of all branches that no training sample reaches
+- ablation variants of the split feature selection (Section 4.2): straight-through Gumbel-softmax and
+  temperature annealing; their settings are not in the paper or the official code, so they follow the
+  cited sources (Jang et al. 2016: tau = 1; NODE-GAM: tau from 1 to 0.01 over 4000 steps)
 Where the paper is silent, values follow the official experiment code (batch size 128, 10,000 epochs).
 """
 
@@ -80,7 +83,8 @@ def glorot_uniform(rng, shape):
 class GradTree:
     def __init__(self, n_features, n_classes, depth=6, lr_index=0.01, lr_values=0.01, lr_leaf=0.01,
                  loss='crossentropy', focal_gamma=3, poly_loss=False, poly_epsilon=2,
-                 average_checkpoints=5, seed=42, feature_names=None):
+                 average_checkpoints=5, seed=42, feature_names=None,
+                 index_activation='entmax', gumbel_temperature=1.0, anneal_steps=4000, min_temperature=0.01):
         self.n_features = n_features
         self.n_classes = n_classes
         self.depth = depth
@@ -92,6 +96,15 @@ class GradTree:
         self.average_checkpoints = average_checkpoints
         self.seed = seed
         self.feature_names = feature_names or [f'x{i}' for i in range(n_features)]
+        # Split feature selection: 'entmax' is GradTree (straight-through entmax); 'gumbel' and
+        # 'annealing' are the alternatives of the paper's ablation (Section 4.2, Tables 4-6)
+        if index_activation not in ('entmax', 'gumbel', 'annealing'):
+            raise ValueError(f'unknown index_activation {index_activation!r}')
+        self.index_activation = index_activation
+        self.gumbel_temperature = gumbel_temperature
+        self.anneal_steps = anneal_steps
+        self.min_temperature = min_temperature
+        self.step = 0  # optimizer steps in the current restart, for the annealing schedule
 
         self.n_internal = 2 ** depth - 1
         self.n_leaves = 2 ** depth
@@ -110,11 +123,31 @@ class GradTree:
             glorot_uniform(rng, (self.n_leaves, self.n_classes)),  # L: leaf class logits
         ]
 
-    def forward(self, X, params):
+    def temperature(self):
+        """Annealing schedule of NODE-GAM (Chang, Caruana and Goldenberg 2021): from 1 to the minimum
+        temperature, linear in log10 space over anneal_steps optimizer steps."""
+        progress = min(self.step / self.anneal_steps, 1.0)
+        return 10 ** (progress * np.log10(self.min_temperature))
+
+    def select_features(self, index_logits, training):
+        """One-hot split feature per internal node (iota in the paper)."""
+        hard = F.one_hot(index_logits.argmax(-1), self.n_features).float()
+        if self.index_activation == 'entmax':  # GradTree: straight-through entmax (Algorithm 1, lines 2-3)
+            return straight_through(entmax15(index_logits), hard)
+        if not training:  # the alternatives evaluate the hard choice, as at test time
+            return hard
+        if self.index_activation == 'gumbel':  # straight-through Gumbel-softmax (Jang, Gu and Poole 2016)
+            return F.gumbel_softmax(index_logits, tau=self.gumbel_temperature, hard=True, dim=-1)
+        # Temperature annealing (NODE-GAM): soft entmax(I / tau) while annealing, hard once tau reaches
+        # its minimum (then I gets no more gradient, as in NODE-GAM)
+        if self.temperature() > self.min_temperature:
+            return entmax15(index_logits / self.temperature())
+        return hard
+
+    def forward(self, X, params, training=False):
         """Tree pass function (Algorithm 1) for a whole batch; returns class logits."""
         index_logits, split_values, leaf_logits = params
-        soft_index = entmax15(index_logits)
-        index = straight_through(soft_index, F.one_hot(soft_index.argmax(-1), self.n_features).float())
+        index = self.select_features(index_logits, training)
 
         # Equation 6 for every internal node: sigmoid(sum_i iota_i tau_i - sum_i iota_i x_i)
         thresholds = (index * split_values).sum(-1)
@@ -165,13 +198,16 @@ class GradTree:
             checkpoints = deque(maxlen=self.average_checkpoints)
             run_best_loss, run_best_params, wait = np.inf, None, 0
             rng = np.random.RandomState(seed)
+            torch.manual_seed(seed)  # Gumbel noise
+            self.step = 0
             for epoch in range(epochs):
                 order = torch.tensor(rng.permutation(n))
                 for start in range(0, n, batch_size):
                     batch = order[start:start + batch_size]
                     optimizer.zero_grad()
-                    self.loss(y_train[batch], self.forward(X_train[batch], params)).backward()
+                    self.loss(y_train[batch], self.forward(X_train[batch], params, training=True)).backward()
                     optimizer.step()
+                    self.step += 1
 
                 # Weight averaging: evaluate the mean of the last checkpoints (one per epoch)
                 checkpoints.append([p.detach().clone() for p in params])
