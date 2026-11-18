@@ -4,6 +4,14 @@
 
 - [model/jiayang/](model/jiayang/README.md): GradTree (PyTorch), CART baseline and the paper's
   feature-selection ablation on all five datasets, with setup, commands to reproduce, and results.
+- [model/myat/](model/myat/): GradTree (PyTorch), baselines and analysis on all five datasets, over 10 trials (seeds 42-51).
+  - [gradtree/](model/myat/gradtree/README.md): the model, training with the paper's tuned and default
+    settings, and our own hyperparameter search.
+  - [baselines/](model/myat/baselines/README.md): CART (paper's tuned and default settings, our own
+    search) and a random forest as an upper reference.
+  - [analysis/](model/myat/analysis/README.md): GradTree vs CART with Wilcoxon tests, the depth study, the
+    feature-selection ablation (entmax, softmax, Gumbel-softmax, temperature annealing), error analysis,
+    tree figures and a leave-one-out encoding leakage check.
 
 ## Team Responsibilities
 
