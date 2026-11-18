@@ -84,7 +84,14 @@ hard tree; `--no-prune` skips pruning.
 The implementation was tested with Python 3.12 and PyTorch 2.3.1 (CPU).  If
 the project virtualenv uses a Python version for which no compatible torch
 wheel is available, create a separate Python 3.12/3.13 environment rather
-than mixing environments.  For a CPU-only install:
+than mixing environments.  The focused model dependency list is in
+[requirements.txt](requirements.txt):
+
+```bash
+pip install -r model/sunny/requirements.txt
+```
+
+For a CPU-only torch build, install torch from the CPU index first:
 
 ```bash
 pip install torch --index-url https://download.pytorch.org/whl/cpu

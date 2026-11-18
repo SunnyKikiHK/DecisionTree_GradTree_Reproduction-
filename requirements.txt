@@ -10,6 +10,7 @@ imbalanced-learn==0.14.2
 joblib==1.6.0
 
 # GradTree PyTorch implementation
+# Focused model requirements: model/sunny/requirements.txt
 torch>=2.2
 entmax>=1.3
 

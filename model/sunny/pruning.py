@@ -126,7 +126,7 @@ class HardDecisionTree:
         if X.ndim != 2:
             raise ValueError(f"X must be 2-D, got shape {X.shape}")
         n = X.shape[0]
-        out_shape = (n,) + self.leaf_values.shape[1:]
+        out_shape = (n,) + self.leaf_values.shape[1:] # binary: (n, ), multi-class: (n, C)
         out = np.empty(out_shape, dtype=np.float64)
         if n == 0:
             return out
@@ -177,6 +177,9 @@ class HardDecisionTree:
     def prune(self, X, min_samples: int | float = 1) -> "HardDecisionTree":
         """Prune branches with fewer than ``min_samples`` training examples.
 
+        X: training features, shape (n_samples, F). It is used only to count how many rows reach each branch.
+        min_samples: minimum branch size
+
         A value in ``(0, 1)`` is treated as a fraction of the dataset size,
         matching the official implementation.
         """
@@ -187,19 +190,24 @@ class HardDecisionTree:
 
         if min_samples < 1:
             min_samples = max(1, int(round(n * float(min_samples))))
-        else:
+        else: # min_samples == 1 only remove empty branches
             min_samples = max(1, int(min_samples))
 
         def build(node_index: int, indices: np.ndarray) -> Node:
+            """
+            indices (m) are the positions of the training rows that reach this node.
+            """
             if node_index >= self.num_internal:
+                # node_index - N converts global node number to a leaf index
+                # len(indices) for recording how many training samples reached that leaf.
                 return Leaf(self.leaf_values[node_index - self.num_internal].copy(), len(indices))
 
-            feature = int(self.feature[node_index])
-            threshold = float(self.threshold[node_index])
-            values = X[indices, feature]
+            feature = int(self.feature[node_index]) #(), the feature chosen in this node
+            threshold = float(self.threshold[node_index]) #()
+            values = X[indices, feature] # (m,) get feature of x at indices, X.shape = (n_samples, F)
             go_left = values <= threshold
-            left_indices = indices[go_left]
-            right_indices = indices[~go_left]
+            left_indices = indices[go_left] # (n_left,)
+            right_indices = indices[~go_left] # (m_right,)
 
             left = build(2 * node_index + 1, left_indices)
             right = build(2 * node_index + 2, right_indices)
@@ -213,7 +221,7 @@ class HardDecisionTree:
                         "pruning reached a node whose children are not both leaves; "
                         "this should not happen with a bottom-up recursion"
                     )
-                return Leaf(0.5 * (left.value + right.value), len(indices))
+                return Leaf(0.5 * (left.value + right.value), len(indices)) # cut here
             if left_too_small:
                 return right
             if right_too_small:

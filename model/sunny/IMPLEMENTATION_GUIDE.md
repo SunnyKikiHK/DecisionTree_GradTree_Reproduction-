@@ -157,8 +157,10 @@ Euclidean-projection alternative used in the ablation. The library provides
 the forward and backward passes; the self-test runs
 `torch.autograd.gradcheck` on both wrappers.
 
-Install the dependency with `pip install entmax` (it is listed in
-`requirements.txt`).
+Install the model dependencies with `pip install -r model/sunny/requirements.txt`
+from the repository root (or just `pip install entmax` if torch is already
+installed). The focused list is in
+[requirements.txt](requirements.txt).
 
 #### `hardmax_st(x)`
 
