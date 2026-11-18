@@ -31,8 +31,8 @@ RESULTS_DIR = HERE / 'results'
 SEEDS = list(range(42, 52))
 MODEL_SEED = 42
 
-# GradTree in the paper, mean and std over 10 trials (as listed in model/myat/config.py):
-# test F1 from Tables 1-2, train F1 from Table 8, tree size from Table 9
+# GradTree in the paper, mean and std over 10 trials: test F1 from Tables 1-2, train F1 from
+# Table 8, tree size from Table 9 (arXiv 2305.03515v7)
 PAPER_RESULTS = {
     'adult': dict(test_f1=(0.743, 0.034), train_f1=(0.875, 0.050), tree_size=(128.0, 37.19)),
     'echocardiogram': dict(test_f1=(0.658, 0.113), train_f1=(0.827, 0.088), tree_size=(43.2, 12.82)),
