@@ -1,0 +1,43 @@
+CART (greedy): test macro F1 0.625, accuracy 0.852, 13 nodes
+
+if pericardial-effusion ≤ 0.0000133:
+    if wall-motion-score ≤ 18:
+        if age-at-heart-attack ≤ 60.4:
+            alive-at-1 = 0  (30 training samples)
+        else:
+            alive-at-1 = 0  (52 training samples)
+    else:
+        if age-at-heart-attack ≤ 56.9:
+            alive-at-1 = 0  (2 training samples)
+        else:
+            alive-at-1 = 1  (19 training samples)
+else:
+    if pericardial-effusion ≤ 0.999:
+        alive-at-1 = 1  (28 training samples)
+    else:
+        if wall-motion-score ≤ 22:
+            alive-at-1 = 0  (19 training samples)
+        else:
+            alive-at-1 = 1  (7 training samples)
+
+GradTree (gradient-based): test macro F1 0.679, accuracy 0.778, 13 nodes
+
+if pericardial-effusion < 0.000329:
+    if fractional-shortening < 0.271:
+        if wall-motion-index < 1.54:
+            alive-at-1 = 0  (42 training samples)
+        else:
+            alive-at-1 = 1  (25 training samples)
+    else:
+        if wall-motion-score < 21.5:
+            alive-at-1 = 0  (20 training samples)
+        else:
+            alive-at-1 = 0  (1 training samples)
+else:
+    if age-at-heart-attack < 62.9:
+        alive-at-1 = 0  (22 training samples)
+    else:
+        if wall-motion-score < 14:
+            alive-at-1 = 1  (8 training samples)
+        else:
+            alive-at-1 = 1  (18 training samples)

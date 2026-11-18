@@ -1,0 +1,87 @@
+{
+  "adult": {
+    "params": {
+      "depth": 9,
+      "lr_index": 0.1,
+      "lr_values": 0.1,
+      "lr_leaf": 0.05,
+      "loss": "crossentropy",
+      "poly_epsilon": 2
+    },
+    "f1": 0.763882968928286,
+    "f1_std": 0.0,
+    "protocol": "holdout",
+    "folds": 1,
+    "trials_scored": 50,
+    "trials": 50,
+    "split_seed": 42
+  },
+  "echocardiogram": {
+    "params": {
+      "depth": 10,
+      "lr_index": 0.05,
+      "lr_values": 0.01,
+      "lr_leaf": 0.1,
+      "loss": "crossentropy",
+      "poly_epsilon": 2
+    },
+    "f1": 0.7996559149353921,
+    "f1_std": 0.07169534960415029,
+    "protocol": "cv",
+    "folds": 5,
+    "trials_scored": 50,
+    "trials": 50,
+    "split_seed": 42
+  },
+  "iris": {
+    "params": {
+      "depth": 4,
+      "lr_index": 0.01,
+      "lr_values": 0.005,
+      "lr_leaf": 0.1,
+      "loss": "focal",
+      "poly_epsilon": 5
+    },
+    "f1": 0.9498692810457516,
+    "f1_std": 0.016601307189542513,
+    "protocol": "cv",
+    "folds": 5,
+    "trials_scored": 50,
+    "trials": 50,
+    "split_seed": 42
+  },
+  "spambase": {
+    "params": {
+      "depth": 10,
+      "lr_index": 0.1,
+      "lr_values": 0.005,
+      "lr_leaf": 0.005,
+      "loss": "crossentropy",
+      "poly_epsilon": null
+    },
+    "f1": 0.9109456835506491,
+    "f1_std": 0.0,
+    "protocol": "holdout",
+    "folds": 1,
+    "trials_scored": 50,
+    "trials": 50,
+    "split_seed": 42
+  },
+  "wine": {
+    "params": {
+      "depth": 6,
+      "lr_index": 0.005,
+      "lr_values": 0.05,
+      "lr_leaf": 0.01,
+      "loss": "crossentropy",
+      "poly_epsilon": 2
+    },
+    "f1": 0.9455079229759538,
+    "f1_std": 0.03469129130538095,
+    "protocol": "cv",
+    "folds": 5,
+    "trials_scored": 50,
+    "trials": 50,
+    "split_seed": 42
+  }
+}

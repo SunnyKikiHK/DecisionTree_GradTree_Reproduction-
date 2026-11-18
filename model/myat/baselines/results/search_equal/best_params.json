@@ -1,0 +1,77 @@
+{
+  "adult": {
+    "params": {
+      "min_samples_split": 5,
+      "min_samples_leaf": 10,
+      "max_features": null,
+      "max_depth": 7,
+      "criterion": "gini",
+      "ccp_alpha": 0.0
+    },
+    "cv_f1": 0.9765078193399098,
+    "cv_f1_std": 0.0013251521679295945,
+    "split_seed": 42,
+    "trials": 50,
+    "folds": 5
+  },
+  "echocardiogram": {
+    "params": {
+      "min_samples_split": 50,
+      "min_samples_leaf": 2,
+      "max_features": "log2",
+      "max_depth": 6,
+      "criterion": "entropy",
+      "ccp_alpha": 0.0
+    },
+    "cv_f1": 0.8163598359584208,
+    "cv_f1_std": 0.035312159422116705,
+    "split_seed": 42,
+    "trials": 50,
+    "folds": 5
+  },
+  "iris": {
+    "params": {
+      "min_samples_split": 2,
+      "min_samples_leaf": 5,
+      "max_features": null,
+      "max_depth": 6,
+      "criterion": "gini",
+      "ccp_alpha": 0.005
+    },
+    "cv_f1": 0.9579707438530969,
+    "cv_f1_std": 0.02677171608964413,
+    "split_seed": 42,
+    "trials": 50,
+    "folds": 5
+  },
+  "spambase": {
+    "params": {
+      "min_samples_split": 5,
+      "min_samples_leaf": 10,
+      "max_features": null,
+      "max_depth": 7,
+      "criterion": "gini",
+      "ccp_alpha": 0.0
+    },
+    "cv_f1": 0.9045560076683532,
+    "cv_f1_std": 0.011253780417884177,
+    "split_seed": 42,
+    "trials": 50,
+    "folds": 5
+  },
+  "wine": {
+    "params": {
+      "min_samples_split": 5,
+      "min_samples_leaf": 1,
+      "max_features": null,
+      "max_depth": 10,
+      "criterion": "entropy",
+      "ccp_alpha": 0.005
+    },
+    "cv_f1": 0.9033235569613277,
+    "cv_f1_std": 0.042206274473671944,
+    "split_seed": 42,
+    "trials": 50,
+    "folds": 5
+  }
+}

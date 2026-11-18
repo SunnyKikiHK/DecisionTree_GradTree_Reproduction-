@@ -1,0 +1,67 @@
+{
+  "adult": {
+    "batch_size": 128,
+    "epochs": 10000,
+    "restarts": 5,
+    "early_stopping_epochs": 200,
+    "prune_threshold": 1,
+    "focal_gamma": 3.0,
+    "depth": 10,
+    "lr_index": 0.05,
+    "lr_values": 0.01,
+    "lr_leaf": 0.005,
+    "loss": "crossentropy"
+  },
+  "echocardiogram": {
+    "batch_size": 128,
+    "epochs": 10000,
+    "restarts": 5,
+    "early_stopping_epochs": 200,
+    "prune_threshold": 1,
+    "focal_gamma": 3.0,
+    "depth": 10,
+    "lr_index": 0.05,
+    "lr_values": 0.01,
+    "lr_leaf": 0.005,
+    "loss": "crossentropy"
+  },
+  "iris": {
+    "batch_size": 128,
+    "epochs": 10000,
+    "restarts": 3,
+    "early_stopping_epochs": 200,
+    "prune_threshold": 1,
+    "focal_gamma": 3.0,
+    "depth": 10,
+    "lr_index": 0.05,
+    "lr_values": 0.01,
+    "lr_leaf": 0.05,
+    "loss": "focal"
+  },
+  "spambase": {
+    "batch_size": 128,
+    "epochs": 10000,
+    "restarts": 5,
+    "early_stopping_epochs": 200,
+    "prune_threshold": 1,
+    "focal_gamma": 3.0,
+    "depth": 10,
+    "lr_index": 0.05,
+    "lr_values": 0.01,
+    "lr_leaf": 0.005,
+    "loss": "crossentropy"
+  },
+  "wine": {
+    "batch_size": 128,
+    "epochs": 10000,
+    "restarts": 3,
+    "early_stopping_epochs": 200,
+    "prune_threshold": 1,
+    "focal_gamma": 3.0,
+    "depth": 10,
+    "lr_index": 0.05,
+    "lr_values": 0.01,
+    "lr_leaf": 0.05,
+    "loss": "focal"
+  }
+}

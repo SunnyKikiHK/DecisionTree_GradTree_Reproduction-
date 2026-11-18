@@ -1,0 +1,17 @@
+{
+  "adult": {
+    "max_depth": 10
+  },
+  "echocardiogram": {
+    "max_depth": 10
+  },
+  "iris": {
+    "max_depth": 10
+  },
+  "spambase": {
+    "max_depth": 10
+  },
+  "wine": {
+    "max_depth": 10
+  }
+}

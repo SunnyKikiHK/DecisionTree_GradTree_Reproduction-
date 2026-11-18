@@ -1,0 +1,72 @@
+{
+  "adult": {
+    "batch_size": 128,
+    "epochs": 10000,
+    "restarts": 3,
+    "early_stopping_epochs": 200,
+    "prune_threshold": 1,
+    "focal_gamma": 3.0,
+    "depth": 9,
+    "lr_index": 0.1,
+    "lr_values": 0.1,
+    "lr_leaf": 0.05,
+    "loss": "crossentropy",
+    "poly_epsilon": 2
+  },
+  "echocardiogram": {
+    "batch_size": 128,
+    "epochs": 10000,
+    "restarts": 3,
+    "early_stopping_epochs": 200,
+    "prune_threshold": 1,
+    "focal_gamma": 3.0,
+    "depth": 10,
+    "lr_index": 0.05,
+    "lr_values": 0.01,
+    "lr_leaf": 0.1,
+    "loss": "crossentropy",
+    "poly_epsilon": 2
+  },
+  "iris": {
+    "batch_size": 128,
+    "epochs": 10000,
+    "restarts": 3,
+    "early_stopping_epochs": 200,
+    "prune_threshold": 1,
+    "focal_gamma": 3.0,
+    "depth": 4,
+    "lr_index": 0.01,
+    "lr_values": 0.005,
+    "lr_leaf": 0.1,
+    "loss": "focal",
+    "poly_epsilon": 5
+  },
+  "spambase": {
+    "batch_size": 128,
+    "epochs": 10000,
+    "restarts": 3,
+    "early_stopping_epochs": 200,
+    "prune_threshold": 1,
+    "focal_gamma": 3.0,
+    "depth": 10,
+    "lr_index": 0.1,
+    "lr_values": 0.005,
+    "lr_leaf": 0.005,
+    "loss": "crossentropy",
+    "poly_epsilon": null
+  },
+  "wine": {
+    "batch_size": 128,
+    "epochs": 10000,
+    "restarts": 3,
+    "early_stopping_epochs": 200,
+    "prune_threshold": 1,
+    "focal_gamma": 3.0,
+    "depth": 6,
+    "lr_index": 0.005,
+    "lr_values": 0.05,
+    "lr_leaf": 0.01,
+    "loss": "crossentropy",
+    "poly_epsilon": 2
+  }
+}

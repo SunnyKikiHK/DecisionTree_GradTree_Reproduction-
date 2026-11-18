@@ -1,0 +1,42 @@
+{
+  "adult": {
+    "min_samples_split": 20,
+    "min_samples_leaf": 2,
+    "max_features": null,
+    "max_depth": 8,
+    "criterion": "gini",
+    "ccp_alpha": 0.0
+  },
+  "echocardiogram": {
+    "min_samples_split": 50,
+    "min_samples_leaf": 1,
+    "max_features": "log2",
+    "max_depth": 4,
+    "criterion": "entropy",
+    "ccp_alpha": 0.005
+  },
+  "iris": {
+    "min_samples_split": 20,
+    "min_samples_leaf": 5,
+    "max_features": null,
+    "max_depth": 9,
+    "criterion": "entropy",
+    "ccp_alpha": 0.01
+  },
+  "spambase": {
+    "min_samples_split": 20,
+    "min_samples_leaf": 2,
+    "max_features": null,
+    "max_depth": 10,
+    "criterion": "gini",
+    "ccp_alpha": 0.001
+  },
+  "wine": {
+    "min_samples_split": 2,
+    "min_samples_leaf": 1,
+    "max_features": "log2",
+    "max_depth": 6,
+    "criterion": "entropy",
+    "ccp_alpha": 0.0
+  }
+}

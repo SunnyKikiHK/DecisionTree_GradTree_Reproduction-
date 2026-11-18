@@ -1,0 +1,40 @@
+CART (greedy): test macro F1 1.000, accuracy 1.000, 11 nodes
+
+if petal_length ≤ 2.45:
+    Iris-setosa  (40 training samples)
+else:
+    if petal_length ≤ 4.72:
+        if sepal_length ≤ 5.1:
+            Iris-versicolor  (5 training samples)
+        else:
+            Iris-versicolor  (32 training samples)
+    else:
+        if petal_width ≤ 1.8:
+            Iris-versicolor  (8 training samples)
+        else:
+            if petal_length ≤ 4.92:
+                Iris-virginica  (5 training samples)
+            else:
+                Iris-virginica  (30 training samples)
+
+GradTree (gradient-based): test macro F1 1.000, accuracy 1.000, 13 nodes
+
+if petal_length < 4.9:
+    if petal_width < 1:
+        if sepal_length < 5.1:
+            Iris-setosa  (22 training samples)
+        else:
+            Iris-setosa  (10 training samples)
+    else:
+        if sepal_width < 3.18:
+            if petal_width < 1.5:
+                Iris-versicolor  (26 training samples)
+            else:
+                Iris-virginica  (5 training samples)
+        else:
+            Iris-versicolor  (3 training samples)
+else:
+    if petal_width < 1.5:
+        Iris-virginica  (1 training samples)
+    else:
+        Iris-virginica  (29 training samples)

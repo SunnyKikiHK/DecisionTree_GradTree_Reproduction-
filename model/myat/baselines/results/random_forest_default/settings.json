@@ -1,0 +1,17 @@
+{
+  "adult": {
+    "n_estimators": 100
+  },
+  "echocardiogram": {
+    "n_estimators": 100
+  },
+  "iris": {
+    "n_estimators": 100
+  },
+  "spambase": {
+    "n_estimators": 100
+  },
+  "wine": {
+    "n_estimators": 100
+  }
+}
