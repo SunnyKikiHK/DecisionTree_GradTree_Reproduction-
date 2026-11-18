@@ -27,6 +27,7 @@ For a detailed file-by-file explanation, see
 | 9 | [`data.py`](data.py) | Loads the CSV splits written by the preprocessing notebooks. |
 | 10 | [`train.py`](train.py) | Command-line training/evaluation entry point. |
 | 11 | [`selftest.py`](selftest.py) | Gradcheck and end-to-end smoke tests. |
+| 12 | [`experiments.py`](experiments.py) | Parallel trial runner used by `train_all.ipynb`: one process per trial, plus the shared dataset/settings tables. |
 
 ## The math in one page
 
@@ -165,6 +166,28 @@ Table 12).
   model is the best epoch of the best restart.  This is the main optimisation
   detail still missing relative to the official code.
 - **Regression / DNDT baselines.** Only classification is implemented.
+
+## Running the sweeps in parallel
+
+`train_all.ipynb` trains one trial per process.  Trials are independent
+(different data seed, no shared state), so the wall clock of a sweep is
+roughly its total training time divided by the number of workers:
+
+```python
+JOBS = 4      # trials in flight
+THREADS = 1   # PyTorch threads inside each worker
+```
+
+One thread per worker is deliberate: four processes with eight OpenMP threads
+each oversubscribes the cores.  Workers are spawned fresh (never forked), so
+the training body must live in an importable module — that is what
+[`experiments.py`](experiments.py) is for.  Rows are appended to
+`results/runs.csv` as each worker finishes, including a `fit_seconds` column.
+
+On a GPU the workers share the single device rather than each getting one.  This
+workload is launch-bound rather than compute-bound, so a CPU run and a GPU run
+take about the same time per trial: on a many-core CPU, `JOBS ≈ cores` is
+usually the faster path.
 
 ## Self-tests
 
