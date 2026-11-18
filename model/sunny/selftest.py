@@ -138,6 +138,17 @@ def test_hard_tree_consistency() -> None:
     pruned = model.hard_tree(prune_X=X.numpy(), min_samples=5)
     assert pruned.size <= tree.size
     assert pruned.predict(X.numpy()).shape == (200,)
+
+    # A shallow tree has fewer internal nodes than the data has features:
+    # depth 2 -> 3 internal nodes but up to 8 selected feature indices.  Feature
+    # indices index X, not the node array, so this must not be rejected.
+    wide_X = torch.randn(60, 8)
+    shallow = GradTree(num_features=8, num_classes=2, depth=2, init="normal", seed=2)
+    shallow_pred = shallow.predict(wide_X)
+    shallow_tree = shallow.hard_tree()
+    assert (shallow_pred == shallow_tree.predict(wide_X.numpy())).all()
+    pruned_shallow = shallow.hard_tree(prune_X=wide_X.numpy(), min_samples=5)
+    assert pruned_shallow.predict(wide_X.numpy()).shape == (60,)
     print("  hard-tree consistency/pruning checks passed")
 
 

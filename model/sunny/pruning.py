@@ -65,12 +65,16 @@ class HardDecisionTree:
     leaf_values:
         ``(2**depth,)`` logits for binary classification, or
         ``(2**depth, num_classes)`` logits for multi-class classification.
+    num_features:
+        Optional number of input features.  When given, ``feature`` is checked
+        against it; feature indices are indices into ``X``, not into the node
+        array, so they are unrelated to ``2**depth - 1``.
 
     Internal nodes are numbered breadth-first from 0.  A node index
     ``>= 2**depth - 1`` denotes leaf ``index - (2**depth - 1)``.
     """
 
-    def __init__(self, feature, threshold, leaf_values) -> None:
+    def __init__(self, feature, threshold, leaf_values, num_features=None) -> None:
         self.feature = np.asarray(feature, dtype=np.int64).reshape(-1)
         self.threshold = np.asarray(threshold, dtype=np.float64).reshape(-1)
         self.leaf_values = np.asarray(leaf_values, dtype=np.float64)
@@ -104,8 +108,20 @@ class HardDecisionTree:
         self.num_leaves = num_leaves
         self.num_classes = 2 if self.leaf_values.ndim == 1 else int(self.leaf_values.shape[1])
 
-        if self.feature.min() < 0 or self.feature.max() >= self.num_internal:
-            raise ValueError("feature indices point outside the internal-node array")
+        # ``feature`` holds *input feature* indices (0 .. num_features - 1), not
+        # node indices, so it must be validated against the width of X.  A
+        # shallow tree has fewer internal nodes than the data has features
+        # (depth 2 -> 3 nodes), so comparing against num_internal rejects valid
+        # trees for any dataset with more than 2**depth - 1 features.
+        if self.feature.min() < 0:
+            raise ValueError(
+                f"feature indices must be non-negative, got {int(self.feature.min())}"
+            )
+        if num_features is not None and self.feature.max() >= int(num_features):
+            raise ValueError(
+                f"feature index {int(self.feature.max())} is outside the "
+                f"{int(num_features)} input features"
+            )
         self.root: Node = self._build(0)
 
     # Construction

@@ -334,7 +334,9 @@ class GradTree(nn.Module):
         threshold = thresholds[np.arange(self.num_internal), feature]  # (N,)
         leaf_values = self.leaf_logits.detach().cpu().numpy()  # (P,) or (P, C)
 
-        tree = HardDecisionTree(feature, threshold, leaf_values)
+        tree = HardDecisionTree(
+            feature, threshold, leaf_values, num_features=self.num_features
+        )
         if prune_X is not None:
             tree.prune(prune_X, min_samples=min_samples)
         return tree

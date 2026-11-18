@@ -1,2 +1,0 @@
-dataset,depth,n,test_macro_f1_mean,test_macro_f1_std,tree_nodes_mean,tree_nodes_std,overfitting_mean,overfitting_std,tree_test_macro_f1_mean,tree_test_macro_f1_std
-iris,1,2,0.30731523378582204,0.022930310400468733,3.0,0.0,0.032327623357035096,0.031853324544013274,0.30731523378582204,0.022930310400468733

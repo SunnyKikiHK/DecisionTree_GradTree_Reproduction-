@@ -11,3 +11,5 @@ __pycache__/
 # Model checkpoints / generated training artifacts
 model/sunny/checkpoints/
 *.pt
+
+model/sunny/results
