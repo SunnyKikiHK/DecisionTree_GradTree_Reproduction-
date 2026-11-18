@@ -1,5 +1,10 @@
 # Decision Trees with Gradient Descent: A Reproduction of GradTree
 
+## Implementations
+
+- [model/jiayang/](model/jiayang/README.md): GradTree (PyTorch), CART baseline and the paper's
+  feature-selection ablation on all five datasets, with setup, commands to reproduce, and results.
+
 ## Team Responsibilities
 
 ### Data Preprocessing
