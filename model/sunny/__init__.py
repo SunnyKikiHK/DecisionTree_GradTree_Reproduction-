@@ -7,7 +7,7 @@ Reference:
 """
 
 from .config import GradTreeConfig
-from .entmax import apply_activation, entmax15, hardmax_st, round_st, sparsemax
+from .sparse_activations import apply_activation, entmax15, hardmax_st, round_st, sparsemax
 from .gradtree import GradTree
 from .losses import GradTreeLoss
 from .metrics import accuracy_score, confusion_matrix, macro_f1_score

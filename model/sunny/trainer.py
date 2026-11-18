@@ -22,7 +22,7 @@ import torch
 from torch import Tensor
 
 from .config import GradTreeConfig
-from .entmax import apply_activation
+from .sparse_activations import apply_activation
 from .gradtree import GradTree
 from .losses import GradTreeLoss
 from .metrics import accuracy_score, macro_f1_score

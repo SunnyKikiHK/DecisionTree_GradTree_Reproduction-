@@ -23,7 +23,7 @@ train.py                build config + model + trainer, run experiment
         │
         ├── config.py          hyperparameters
         ├── gradtree.py        the model
-        │     ├── entmax.py          sparse activation + ST estimators
+        │     ├── sparse_activations.py          sparse activation + ST estimators
         │     └── tree_structure.py  path tables (Eq. 4-5)
         ├── losses.py          CE / focal / PolyLoss
         ├── trainer.py         Adam, early stopping, restarts, checkpoints
@@ -125,7 +125,7 @@ Key points:
 
 ---
 
-### 2.3 `entmax.py` — sparse activations and straight-through estimators
+### 2.3 `sparse_activations.py` — sparse activations and straight-through estimators
 
 **Role:** wraps the sparse activations from the MIT-licensed
 [`entmax`](https://github.com/deep-spin/entmax) package and adds the two
@@ -636,7 +636,7 @@ sigmoid derivative.
 | Want to change | Edit |
 |---|---|
 | Add a hyperparameter | `config.py`, then the CLI in `train.py` |
-| Add an activation | `entmax.py` (`apply_activation`), validation lists |
+| Add an activation | `sparse_activations.py` (`apply_activation`), validation lists |
 | Add a loss | `losses.py`, validation in `config.py`, CLI choices |
 | Change the forward pass | `gradtree.py` (`forward`) |
 | Change pruning rules | `pruning.py` (`HardDecisionTree.prune`) |

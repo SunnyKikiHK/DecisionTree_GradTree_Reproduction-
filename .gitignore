@@ -4,6 +4,7 @@ preprocess/wine_output/
 
 # Local Python environments and notebook checkpoints
 .venv/
+venv
 .ipynb_checkpoints/
 __pycache__/
 

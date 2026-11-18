@@ -17,7 +17,7 @@ For a detailed file-by-file explanation, see
 | Step | Module | What it does |
 |---|---|---|
 | 1 | [`config.py`](config.py) | Hyperparameters, validation, paper-default factory. |
-| 2 | [`entmax.py`](entmax.py) | Wraps the `entmax` package (`entmax15`, `sparsemax`) and adds straight-through hardmax/rounding. |
+| 2 | [`sparse_activations.py`](sparse_activations.py) | Wraps the `entmax` package (`entmax15`, `sparsemax`) and adds straight-through hardmax/rounding. |
 | 3 | [`tree_structure.py`](tree_structure.py) | Constant path tables: internal node index and left/right branch per leaf/depth (Equations 4-5). |
 | 4 | [`losses.py`](losses.py) | Cross-entropy, focal loss and PolyLoss for binary/multi-class. |
 | 5 | [`gradtree.py`](gradtree.py) | The model: `I`, `T`, leaf logits, and the vectorised tree pass (Algorithm 1). |
@@ -146,7 +146,7 @@ Table 12).
   MIT-licensed [`entmax`](https://github.com/deep-spin/entmax) package,
   which provides PyTorch autograd.  The self-test `gradcheck`s the wrappers.
   Only the GradTree-specific straight-through estimators live in
-  `entmax.py`.
+  `sparse_activations.py`.
 - **Threshold sign.** The official code (and Algorithm 1) uses
   `sigmoid(T_selected - x_selected)`, so the hard tree routes
   `x <= threshold` left.  Equation 6 in the paper writes the opposite sign;

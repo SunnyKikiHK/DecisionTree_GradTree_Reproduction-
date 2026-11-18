@@ -19,7 +19,7 @@ import numpy as np
 import torch
 
 from .config import GradTreeConfig
-from .entmax import entmax15, hardmax_st, round_st, sparsemax
+from .sparse_activations import entmax15, hardmax_st, round_st, sparsemax
 from .gradtree import GradTree
 from .losses import GradTreeLoss
 from .metrics import accuracy_score, macro_f1_score

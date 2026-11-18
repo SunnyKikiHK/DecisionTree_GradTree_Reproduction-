@@ -44,7 +44,7 @@ import torch
 from torch import Tensor, nn
 from torch.nn import functional
 
-from .entmax import apply_activation, hardmax_st, round_st
+from .sparse_activations import apply_activation, hardmax_st, round_st
 from .tree_structure import make_tree_structure
 
 
