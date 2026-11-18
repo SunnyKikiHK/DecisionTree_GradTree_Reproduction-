@@ -1,0 +1,58 @@
+50 trials to train (0 already in runs.csv)
+00:15 adult           seed 42: test F1 0.750, 131 nodes, 897 epochs, 6114s
+00:16 adult           seed 46: test F1 0.737, 159 nodes, 902 epochs, 6165s
+00:18 adult           seed 49: test F1 0.742, 153 nodes, 927 epochs, 6325s
+00:19 adult           seed 43: test F1 0.748, 157 nodes, 932 epochs, 6367s
+00:33 adult           seed 48: test F1 0.759, 165 nodes, 1015 epochs, 7190s
+00:34 adult           seed 44: test F1 0.740, 163 nodes, 1023 epochs, 7230s
+00:51 adult           seed 45: test F1 0.754, 209 nodes, 1164 epochs, 8307s
+01:06 adult           seed 47: test F1 0.776, 147 nodes, 1277 epochs, 9169s
+01:29 spambase        seed 45: test F1 0.906, 181 nodes, 1495 epochs, 3300s
+01:37 spambase        seed 42: test F1 0.889, 133 nodes, 2059 epochs, 4715s
+01:39 spambase        seed 43: test F1 0.915, 175 nodes, 2088 epochs, 4775s
+01:50 adult           seed 51: test F1 0.722, 179 nodes, 840 epochs, 5664s
+01:52 spambase        seed 44: test F1 0.889, 155 nodes, 2247 epochs, 4717s
+01:54 wine            seed 42: test F1 0.952, 33 nodes, 1904 epochs, 150s
+01:56 wine            seed 43: test F1 0.937, 21 nodes, 1811 epochs, 142s
+01:59 wine            seed 44: test F1 0.919, 27 nodes, 1772 epochs, 143s
+02:02 wine            seed 45: test F1 0.916, 27 nodes, 2238 epochs, 175s
+02:04 spambase        seed 47: test F1 0.886, 147 nodes, 1871 epochs, 3485s
+02:04 wine            seed 46: test F1 0.885, 19 nodes, 1998 epochs, 164s
+02:06 wine            seed 48: test F1 0.896, 21 nodes, 1234 epochs, 104s
+02:07 wine            seed 47: test F1 0.889, 21 nodes, 2334 epochs, 189s
+02:07 spambase        seed 46: test F1 0.915, 159 nodes, 2303 epochs, 4559s
+02:10 wine            seed 50: test F1 0.975, 15 nodes, 2389 epochs, 186s
+02:11 wine            seed 51: test F1 0.977, 23 nodes, 2347 epochs, 184s
+02:11 wine            seed 49: test F1 0.939, 21 nodes, 4004 epochs, 313s
+02:12 echocardiogram  seed 42: test F1 0.645, 69 nodes, 1820 epochs, 77s
+02:12 echocardiogram  seed 43: test F1 0.486, 51 nodes, 1665 epochs, 71s
+02:12 echocardiogram  seed 44: test F1 0.571, 61 nodes, 1496 epochs, 65s
+02:13 echocardiogram  seed 45: test F1 0.632, 57 nodes, 1623 epochs, 69s
+02:13 echocardiogram  seed 46: test F1 0.711, 51 nodes, 1585 epochs, 66s
+02:13 echocardiogram  seed 48: test F1 0.715, 37 nodes, 894 epochs, 39s
+02:13 echocardiogram  seed 47: test F1 0.341, 51 nodes, 1285 epochs, 55s
+02:14 echocardiogram  seed 49: test F1 0.571, 29 nodes, 977 epochs, 43s
+02:14 echocardiogram  seed 50: test F1 0.677, 39 nodes, 1091 epochs, 44s
+02:14 echocardiogram  seed 51: test F1 0.632, 59 nodes, 1301 epochs, 54s
+02:14 iris            seed 42: test F1 0.966, 15 nodes, 1616 epochs, 55s
+02:15 spambase        seed 48: test F1 0.891, 167 nodes, 1507 epochs, 2757s
+02:15 iris            seed 43: test F1 0.961, 15 nodes, 1687 epochs, 58s
+02:15 iris            seed 44: test F1 0.933, 19 nodes, 1568 epochs, 51s
+02:15 iris            seed 46: test F1 0.963, 11 nodes, 1337 epochs, 44s
+02:16 iris            seed 49: test F1 0.939, 17 nodes, 1066 epochs, 35s
+02:16 iris            seed 47: test F1 0.960, 11 nodes, 1513 epochs, 48s
+02:16 iris            seed 48: test F1 0.735, 21 nodes, 1344 epochs, 45s
+02:16 iris            seed 45: test F1 0.821, 19 nodes, 2634 epochs, 88s
+02:17 iris            seed 50: test F1 0.936, 17 nodes, 1599 epochs, 69s
+02:18 iris            seed 51: test F1 0.922, 19 nodes, 3037 epochs, 131s
+02:25 spambase        seed 49: test F1 0.902, 151 nodes, 1625 epochs, 2878s
+02:27 adult           seed 50: test F1 0.774, 61 nodes, 1284 epochs, 7943s
+02:29 spambase        seed 50: test F1 0.928, 155 nodes, 1859 epochs, 3045s
+02:35 spambase        seed 51: test F1 0.917, 149 nodes, 2022 epochs, 2697s
+
+       dataset  trials  test_f1  test_f1_std  paper_test_f1  paper_test_f1_std  train_f1  paper_train_f1  tree_size  tree_size_std  paper_tree_size  test_accuracy  fit_seconds
+echocardiogram      10    0.598        0.108          0.658              0.113     0.907           0.827     50.400         11.595           43.200          0.722       58.214
+         adult      10    0.750        0.016          0.743              0.034     0.857           0.875    152.400         36.178          128.000          0.825     7047.341
+      spambase      10    0.904        0.014          0.903              0.025     0.912           0.905    157.200         13.370          120.200          0.908     3692.828
+          iris      10    0.914        0.072          0.938              0.057     0.970           0.978     16.400          3.231           14.400          0.917       62.378
+          wine      10    0.929        0.032          0.933              0.031     0.996           0.995     22.800          4.771           24.000          0.928      175.195

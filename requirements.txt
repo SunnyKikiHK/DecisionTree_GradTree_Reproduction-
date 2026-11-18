@@ -9,10 +9,11 @@ category_encoders==2.11.2
 imbalanced-learn==0.14.2
 joblib==1.6.0
 
-# GradTree model (model/myat)
+# GradTree models (model/myat, model/sunny; focused list for Sunny's model: model/sunny/requirements.txt)
 torch==2.15.0
+entmax>=1.3
 
-# Figures (analysis/)
+# Figures (model/myat/analysis, notebooks)
 matplotlib==3.11.2
 
 # Notebook execution and validation

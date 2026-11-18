@@ -1,0 +1,6 @@
+dataset,gradtree_test_f1,cart_test_f1,paper_gradtree_test_f1,paper_cart_test_f1,gradtree_tree_size,cart_tree_size,paper_gradtree_tree_size,paper_cart_tree_size,gradtree_wins_trials
+adult,0.750 ± 0.016,0.766 ± 0.011,0.743 ± 0.034,0.771 ± 0.011,152.4,158.4,128.0,156.6,2
+echocardiogram,0.598 ± 0.108,0.538 ± 0.114,0.658 ± 0.113,0.555 ± 0.111,50.4,36.0,43.2,36.2,6
+spambase,0.904 ± 0.014,0.917 ± 0.010,0.903 ± 0.025,0.917 ± 0.011,157.2,201.0,120.2,201.0,2
+iris,0.914 ± 0.072,0.937 ± 0.046,0.938 ± 0.057,0.937 ± 0.046,16.4,9.4,14.4,9.4,3
+wine,0.929 ± 0.032,0.903 ± 0.025,0.933 ± 0.031,0.907 ± 0.042,22.8,15.2,24.0,13.4,8

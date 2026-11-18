@@ -9,5 +9,10 @@ model/myat/baselines/results/*/predictions/
 
 # Local Python environments and notebook checkpoints
 .venv/
+venv
 .ipynb_checkpoints/
 __pycache__/
+
+# Model checkpoints / generated training artifacts
+model/sunny/checkpoints/
+*.pt
